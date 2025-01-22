@@ -1,2 +1,4 @@
 venv/
 .env
+day.txt
+*.db
