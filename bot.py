@@ -106,9 +106,18 @@ async def handle_score(message):
         return
 
     msg_day = int(match.group(1).replace(',', ''))
-    if day != msg_day:
+    if msg_day < day:
         return await chl_scores.send(
-            f"<@{message.author.id}> Wrong one, genius - we're on Wordle {day}.",
+            f"<@{message.author.id}> Stuck in the past? We're on Wordle {day}.",
+            allowed_mentions=allow_all)
+    elif msg_day > day + 1:
+        return await chl_scores.send(
+            f"<@{message.author.id}> Whoa, slow down. We're on Wordle {day}.",
+            allowed_mentions=allow_all)
+    elif msg_day == day + 1:
+        await chl_scores.send(
+            f"<@{message.author.id}> I'm writing that down, but we're still on Wordle {day}. "
+            "You'll see your score on the leaderboard when we catch up :thumbs_up:",
             allowed_mentions=allow_all)
 
     score = match.group(2)
