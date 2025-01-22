@@ -129,7 +129,7 @@ async def handle_score(message):
 
     score = int(score) if score.isnumeric() else 7
     try:
-        cur.execute(f"INSERT INTO scores VALUES ({message.author.id}, {day}, {score}, {hard}, {not lock})")
+        cur.execute(f"INSERT INTO scores VALUES ({message.author.id}, {msg_day}, {score}, {hard}, {not lock})")
         con.commit()
     except sqlite3.IntegrityError:
         return await chl_scores.send(
